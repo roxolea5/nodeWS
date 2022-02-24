@@ -9,8 +9,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(router);
 
 router.get('/message', function(req, res){
-    console.log(req.query);
-    console.log(req.body);
+    console.log(req.headers);
+    res.header({
+        "Custom-header": "Header personalizado"
+    })
     res.send('Lista de mensajes');
 });
 
