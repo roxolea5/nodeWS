@@ -13,7 +13,10 @@ router.get('/message', function(req, res){
     res.header({
         "Custom-header": "Header personalizado"
     })
-    res.send('Lista de mensajes');
+    // res.send() //respuesta vacia
+    //res.status(201).send({error: '', body:'Creado correctamente'}) 
+    res.status(201).send([{error: '', body:'Creado correctamente'}]) 
+    // res.send('Lista de mensajes');
 });
 
 router.post('/message', function(req, res){
