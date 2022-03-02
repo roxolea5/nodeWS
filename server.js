@@ -1,7 +1,7 @@
-const express = require('express');
+const express = require('express'); //importa express
 const bodyParser = require('body-parser')
 
-const response = require('./network/response')
+const response = require('./network/response') //llama al modulo local
 
 const router = express.Router();
 
@@ -12,13 +12,18 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(router);
 
 router.get('/message', function(req, res){
-    response.success(req, res, 'Lista de mensajes') //va a la respuesta success y me da la respuesta
+    response.success(req, res, 'Lista de mensajes', 202) //va a la respuesta success y me da la respuesta
     
 });
 
 router.post('/message', function(req, res){
     console.log(req.body);
-    response.success(req, res, 'Creado correctamente')
+    if (req.query.error == "ok"){
+        response.error(req, res, 'Error simulado', 400);
+    } else {
+        response.success(req, res, 'Creado correctamente', 201);
+    }
+    
 });
 
 router.delete('/message', function(req, res){
