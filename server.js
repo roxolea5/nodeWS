@@ -30,6 +30,8 @@ router.delete('/message', function(req, res){
     res.send('Mensaje borrado')
 });
 
+app.use('/app', express.static('public')) //usará el html que está en los estaticos del public y lo mostrará en el endpoint /app
+
 // app.use('/', function(req, res){
 //     res.send('Hola');
 // })
