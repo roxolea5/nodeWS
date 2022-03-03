@@ -6,12 +6,12 @@ const router = express.Router();
 const response = require('../../network/response')
 
 
-router.get('/message', function(req, res){
+router.get('/', function(req, res){
     response.success(req, res, 'Lista de mensajes', 202) //va a la respuesta success y me da la respuesta
     
 });
 
-router.post('/message', function(req, res){
+router.post('/', function(req, res){
     console.log(req.query);
     if (req.query.error == "ok"){
         response.error(req, res, 'Error inesperado', 500, 'Es solo una simulación de los errores');

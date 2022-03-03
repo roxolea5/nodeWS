@@ -1,13 +1,17 @@
 const express = require('express'); //importa express
 const bodyParser = require('body-parser')
 
-const router = require('./components/message/network');
+const router = require('./network/routes');
 
 var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(router);
+//app.use(router); // esto era para usar el middleware de express
+
+//Para usar el routes, y para pasar el servidor de express que tenemos creado a la app al router para crear rutas necesarias.
+
+router(app);
 
 
 
