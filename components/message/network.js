@@ -2,8 +2,10 @@
 
 //Se importa express para crear el router
 const express = require('express');
-const router = express.Router();
 const response = require('../../network/response')
+const controller = require('./controller')
+const router = express.Router();
+
 
 
 router.get('/', function(req, res){
@@ -12,13 +14,14 @@ router.get('/', function(req, res){
 });
 
 router.post('/', function(req, res){
-    console.log(req.query);
-    if (req.query.error == "ok"){
-        response.error(req, res, 'Error inesperado', 500, 'Es solo una simulación de los errores');
-    } else {
-        response.success(req, res, 'Creado correctamente', 201);
-    }
-    
+    controller.addMessage(req.body.user, req.body.message)
+    //Agregamos esto para trabajar con la promesa del controlador
+    .then((fullMessage) => {
+        response.success(req, res, fullMessage, 201);
+    })
+    .catch(e => {
+        response.error(req, res, 'Información inválida', 400, 'Error en el controlador');
+    });
 });
 
 router.delete('/message', function(req, res){
