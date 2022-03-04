@@ -1,5 +1,7 @@
 //Primera función: añadir un nuevo mensaje
 
+const store = require('./store');
+
 function addMessage(user, message){
     return new Promise((resolve, reject) => {
         if (!user || !message) {
@@ -12,10 +14,18 @@ function addMessage(user, message){
             date: new Date(),
         };
         console.log(fullMessage);
+        store.add(fullMessage); //se comunica con la bd mockeada
         resolve(fullMessage);
     });    
 }
 
+function getMessages(){
+    return new Promise((resolve, reject) => {
+        resolve(store.list());
+    })
+}
+
 module.exports = {
-    addMessage
+    addMessage,
+    getMessages
 }
