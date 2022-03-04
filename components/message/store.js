@@ -1,11 +1,23 @@
-const list = [] //lista para guardar mensajes
+const db = require('mongoose');
+const Model = require('./model');
+
+db.Promise = global.Promise;
+db.connect('mongodb+srv://rotz05:rotz050990@cluster0.qgnvy.mongodb.net/NodeAPI',{
+    useNewUrlParser: true,
+});
+
+console.log('[db] Conectada con éxito')
 
 function addMessage(message) {
-    list.push(message);
+    //list.push(message);
+    const myMessage = new Model(message)
+    myMessage.save()
 }; //js puro
 
-function getMessages(){
-    return list;
+async function getMessages(){
+    //return list;
+    const messages = await Model.find();
+    return messages;
 }
 
 module.exports = {
