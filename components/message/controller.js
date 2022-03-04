@@ -25,6 +25,12 @@ function getMessages(){
     })
 }
 
+function updateMessage(){
+    return new Promise((resolve, reject) => {
+        resolve(store.list());
+    })
+}
+
 module.exports = {
     addMessage,
     getMessages

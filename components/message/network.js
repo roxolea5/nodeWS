@@ -30,6 +30,11 @@ router.post('/', function(req, res){
     });
 });
 
+router.patch('/:id', function(req, res){
+    console.log(req.params.id);
+    res.send('Ok')
+});
+
 router.delete('/message', function(req, res){
     res.send('Mensaje borrado')
 });
