@@ -46,15 +46,13 @@ router.patch('/:id', function(req, res){
 router.get('/:id', function(req, res){
     console.log(req.params.id);
 
-    // controller.updateMessage(req.params.id, req.body.message)
-    //     .then((data) => {
-    //         response.success(req, res, data, 200);
-    //     })
-    //     .catch(e => {
-    //         response.error(req, res, 'Error interno', 500, e)
-    //     })
-
-    res.send('Ok')
+    controller.getSingleMessage(req.params.id)
+        .then((singleMessage) => {
+            response.success(req, res, singleMessage, 200);
+        })
+        .catch(e => {
+            response.error(req, res, 'Error interno', 500, e)
+        })
 
 });
 

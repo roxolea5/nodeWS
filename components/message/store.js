@@ -30,10 +30,16 @@ async function updateText(id, message){
     return newMessage;
 }
 
+async function getMessage(id, message){
+    const foundmessage = await Model.findById(id)
+
+    return foundmessage;
+}
+
 module.exports = {
     add: addMessage,
     list: getMessages,
-    //get
+    getOne: getMessage,
     updateText
     //delete
 }

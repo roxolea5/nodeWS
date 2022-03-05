@@ -35,8 +35,19 @@ function updateMessage(id, message){
     })
 }
 
+function getSingleMessage(id){
+    return new Promise(async (resolve, reject) => {
+        if (!id){
+            return reject('Invalid request')
+        }
+        const result = await store.getOne(id);
+        resolve(result);
+    })
+}
+
 module.exports = {
     addMessage,
     getMessages,
-    updateMessage
+    updateMessage,
+    getSingleMessage
 }
