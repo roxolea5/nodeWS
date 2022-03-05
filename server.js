@@ -1,8 +1,11 @@
 const express = require('express'); //importa express
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+
+const db = require('./db');
 
 const router = require('./network/routes');
 
+db('mongodb+srv://rotz05:rotz050990@cluster0.qgnvy.mongodb.net/NodeAPI')
 var app = express();
 
 app.use(bodyParser.json());

@@ -1,13 +1,4 @@
-const db = require('mongoose');
-const { deleteMessage } = require('./controller');
 const Model = require('./model');
-
-db.Promise = global.Promise;
-db.connect('mongodb+srv://rotz05:rotz050990@cluster0.qgnvy.mongodb.net/NodeAPI',{
-    useNewUrlParser: true,
-});
-
-console.log('[db] Conectada con éxito')
 
 function addMessage(message) {
     //list.push(message);
