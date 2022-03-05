@@ -1,4 +1,5 @@
 const db = require('mongoose');
+const { deleteMessage } = require('./controller');
 const Model = require('./model');
 
 db.Promise = global.Promise;
@@ -14,9 +15,12 @@ function addMessage(message) {
     myMessage.save()
 }; //js puro
 
-async function getMessages(){
-    //return list;
-    const messages = await Model.find();
+async function getMessages(filterUser){
+    let filter = {}
+    if (filterUser !== null){
+        filter = { user: filterUser}
+    } 
+    const messages = await Model.find(filter);
     return messages;
 }
 
@@ -36,10 +40,17 @@ async function getMessage(id, message){
     return foundmessage;
 }
 
+function removeMessage(id){
+    return Model.deleteOne({
+        _id: id
+    })
+}
+
 module.exports = {
     add: addMessage,
     list: getMessages,
     getOne: getMessage,
-    updateText
-    //delete
+    updateText,
+    remove: removeMessage
+    
 }
