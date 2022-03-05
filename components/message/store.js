@@ -6,13 +6,22 @@ function addMessage(message) {
     myMessage.save()
 }; //js puro
 
-async function getMessages(filterUser){
-    let filter = {}
-    if (filterUser !== null){
-        filter = { user: filterUser}
-    } 
-    const messages = await Model.find(filter);
-    return messages;
+async function getMessages(filterUser){    
+    return new Promise((resolve, reject) => {
+        let filter = {};
+        if (filterUser !== null){
+            filter = { user: filterUser };
+        } 
+        Model.find(filter)
+            .populate('user')
+            .exec((error, populated) => {
+                if (error){
+                    return reject(error)
+                }
+                resolve(populated)
+            });//permite ejecutar el populate
+    })
+    
 }
 
 async function updateText(id, message){
