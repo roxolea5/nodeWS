@@ -22,8 +22,8 @@ async function getMessages(){
 
 async function updateText(id, message){
     const foundmessage = await Model.findOne({
-        id:id
-    });
+        _id:id
+    }); // o findById(id) en vez de findOne({_id: id})
 
     foundmessage.message = message;
     const newMessage = await foundmessage.save();
