@@ -18,9 +18,17 @@ function getChats(){
     
 }
 
+function getChatsUser(userId){
+    return new Promise((resolve, reject) => {
+        resolve(store.listByUser(userId));
+    })
+    
+}
+
 
 module.exports = {
     addChat,
-    getChats
+    getChats,
+    getChatsUser
 }
 

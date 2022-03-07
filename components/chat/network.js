@@ -23,5 +23,15 @@ router.get('/', function(req, res){
         })
 })
 
+router.get('/:userId', function(req, res){
+    controller.getChatsUser(req.params.userId)
+        .then((users) => {
+            response.success(req, res, users, 200)
+        })
+        .catch(e => {
+            response.error(req, res, 'Unexpected chat', 500, e)
+        })
+})
+
 module.exports = router;
 
