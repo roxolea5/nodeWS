@@ -6,11 +6,13 @@ function addMessage(message) {
     myMessage.save()
 }; //js puro
 
-async function getMessages(filterUser){    
+async function getMessages(filterChat){
+    console.log('entra')    
     return new Promise((resolve, reject) => {
         let filter = {};
-        if (filterUser !== null){
-            filter = { user: filterUser };
+        if (filterChat !== null){
+            //filter = { user: filterChat }; //así da errores porque toma el filtro y lo busca en el campo user, debe ser en el campo chat Ya no se puede poner el user name en query params porque ya hay una relacion y busca al object id no al nombre
+            filter = { chat: filterChat };
         } 
         Model.find(filter)
             .populate('user')
