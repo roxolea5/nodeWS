@@ -1,6 +1,7 @@
 //Primera función: añadir un nuevo mensaje
 
 const store = require('./store');
+const socket = require('../../socket').socket; 
 
 function addMessage(chat, user, message, file){
     return new Promise((resolve, reject) => {
@@ -23,6 +24,8 @@ function addMessage(chat, user, message, file){
         };
         console.log(fullMessage);
         store.add(fullMessage); //se comunica con la bd mockeada
+
+        socket.io.emit('message', fullMessage);// esot emite los mensajes
         resolve(fullMessage);
     });    
 }
