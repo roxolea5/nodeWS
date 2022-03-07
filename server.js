@@ -2,6 +2,7 @@ const express = require('express'); //importa express
 const app = express();
 const server = require('http').Server(app);
 
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const socket = require('./socket') //referencia a socket
 const db = require('./db');
@@ -9,6 +10,7 @@ const router = require('./network/routes');
 
 db('mongodb+srv://rotz05:rotz050990@cluster0.qgnvy.mongodb.net/NodeAPI')
 
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
