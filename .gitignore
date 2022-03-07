@@ -6,3 +6,5 @@ package.json
 
 .env
 .env.example
+
+uploads

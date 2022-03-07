@@ -12,7 +12,9 @@ var storage = multer.diskStorage({
       cb(null, './uploads')
     },
     filename: function (req, file, cb) {
-      cb(null, file.originalname)
+        filename = file.originalname
+        nospaces = filename.replace(/\s+/g, '');
+      cb(null, nospaces)
     }
 })
 
@@ -34,7 +36,7 @@ router.get('/', function(req, res){
 });
 
 router.post('/', upload.single('file'), function(req, res){
-    controller.addMessage(req.body.chat, req.body.user, req.body.message)
+    controller.addMessage(req.body.chat, req.body.user, req.body.message, req.file)
     //Agregamos esto para trabajar con la promesa del controlador
     .then((fullMessage) => {
         response.success(req, res, fullMessage, 201);

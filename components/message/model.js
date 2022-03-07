@@ -19,6 +19,7 @@ const mySchema = new Schema({
         required: true,
     },
     date: Date,
+    file: String,
 });
 
 // todo lo que se creara tendra ese schema con la base de datos
