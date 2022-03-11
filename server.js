@@ -2,13 +2,15 @@ const express = require('express'); //importa express
 const app = express();
 const server = require('http').Server(app);
 
+const config = require('./config');
+
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const socket = require('./socket') //referencia a socket
 const db = require('./db');
 const router = require('./network/routes');
 
-db('mongodb+srv://rotz05:rotz050990@cluster0.qgnvy.mongodb.net/NodeAPI')
+db(config.dbUrl)
 
 app.use(cors());
 
@@ -22,12 +24,12 @@ router(app);
 
 
 
-app.use('/app', express.static('public')) //usará el html que está en los estaticos del public y lo mostrará en el endpoint /app
+app.use('/'+ config.publicRoute, express.static('public')) //usará el html que está en los estaticos del public y lo mostrará en el endpoint /app
 
 // app.use('/', function(req, res){
 //     res.send('Hola');
 // })
 
 server.listen(3000, function(){
-    console.log("La aplicación está escuchando en http://localhost:3000");
+    console.log("La aplicación está escuchando en " + config.host + ":" + config.port);
 });
